@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-send-name
+  labels:
+    app: send-name-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: send-name-app
+  template:
+    metadata:
+      labels:
+        app: send-name-app
+    spec:
+      hostNetwork: true
+      containers:
+      - name: send-name-app
+        image: kabartkiew/send-name-app
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+            hostPort: 8080
+
